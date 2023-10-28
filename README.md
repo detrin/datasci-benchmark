@@ -20,7 +20,7 @@ python benchmark.py --rows 1000 --cols 10 --runs 10
 
 ## My options
 ```bash
-python benchmark.py --rows 10000000 --cols 10 --runs 50 --json --pandas --polars --xgboost --lightgbm --name M1
+python benchmark.py --rows 10000000 --cols 10 --runs 20 --json --pandas --polars --xgboost --lightgbm --name M1
 python benchmark.py --rows 1000000 --cols 10 --runs 50 --json --binning --logreg --name M1
 python benchmark.py --rows 100000 --cols 10 --runs 50 --json --knn --name M1
 python benchmark.py --rows 10000 --cols 10 --runs 50 --json --svm --torch --name M1
