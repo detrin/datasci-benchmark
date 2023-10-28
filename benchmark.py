@@ -63,10 +63,9 @@ if args.knn:
     from knn_benchmark import benchmark_knn
     test_info.append(["knn", benchmark_knn])
 
-
+results = []
 for name, func in test_info:
-    if not args.json:
-        print(f"Benchmarking {name}...")
+    print(f"Benchmarking {name}...")
     times = []
     for _ in range(args.runs):
         times.append(func(n_rows=args.rows, n_cols=args.cols, verbose=False))
@@ -75,11 +74,9 @@ for name, func in test_info:
     mus = {k: np.mean([t[k] for t in times]) for k in keys}
     stds = {k: np.std([t[k] for t in times]) for k in keys}
 
-    if not args.json:
-        for k in keys:
-            print(f"Mean {k}: {mus[k]:.4f} s +/- {stds[k]:.4f} s")
-    else:
-        results = []
+    for k in keys:
+        print(f"Mean {k}: {mus[k]:.4f} s +/- {stds[k]:.4f} s")
+    if args.json:
         for k in keys:
             results.append({"machine": args.name, "name": name, "metric": k, "value": mus[k], "std": stds[k]})
 
