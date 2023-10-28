@@ -3,3 +3,8 @@ scikit-learn
 pandas
 polars
 torch
+optuna
+optbinning
+lightgbm
+ortools
+pyro-ppl

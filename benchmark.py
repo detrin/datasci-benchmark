@@ -1,6 +1,9 @@
 import numpy as np
 import timeit
 import argparse
+import warnings  
+
+warnings.filterwarnings("ignore")  
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
@@ -15,9 +18,16 @@ parser.add_argument(
 
 parser.add_argument("--pandas", action="store_true", help="Benchmark pandas")
 parser.add_argument("--polars", action="store_true", help="Benchmark polars")
+parser.add_argument("--binning", action="store_true", help="Benchmark binning")
+parser.add_argument("--logreg", action="store_true", help="Benchmark Logistic Regression")
 parser.add_argument("--xgboost", action="store_true", help="Benchmark xgboost")
 parser.add_argument("--torch", action="store_true", help="Benchmark torch")
+parser.add_argument("--svm", action="store_true", help="Benchmark SVM")
+parser.add_argument("--knn", action="store_true", help="Benchmark KNN")
 args = parser.parse_args()
+
+if args.runs < 3:
+    raise ValueError("Number of runs must be at least 3")
 
 test_info = []
 if args.pandas:
@@ -26,12 +36,24 @@ if args.pandas:
 if args.polars:
     from polars_benchmark import benchmark_polars
     test_info.append(["polars", benchmark_polars])
+if args.binning:
+    from binning_benchmark import benchmark_binning
+    test_info.append(["binning", benchmark_binning])
+if args.logreg:
+    from logreg_benchmark import benchmark_logreg
+    test_info.append(["logreg", benchmark_logreg])
 if args.xgboost:
     from xgboost_benchmark import benchmark_xgboost
     test_info.append(["xgboost", benchmark_xgboost])
 if args.torch:
     from torch_benchmark import benchmark_torch
     test_info.append(["torch", benchmark_torch])
+if args.svm:
+    from svm_benchmark import benchmark_svm
+    test_info.append(["svm", benchmark_svm])
+if args.knn:
+    from knn_benchmark import benchmark_knn
+    test_info.append(["knn", benchmark_knn])
 
 
 for name, func in test_info:
