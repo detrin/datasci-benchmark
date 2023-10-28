@@ -19,7 +19,7 @@ class SimpleNet(nn.Module):
         return x
 
 
-def benchmark_pytorch(n_rows=100000, n_cols=20, n_classes=2, verbose=True):
+def benchmark_torch(n_rows=100000, n_cols=20, n_classes=2, verbose=True):
     # Create a random n-class classification problem
     if verbose:
         print(f"Generating dataset with {n_rows} samples, {n_cols} features...")
@@ -86,4 +86,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    benchmark_pytorch(n_rows=args.rows, n_cols=args.cols)
+    benchmark_torch(n_rows=args.rows, n_cols=args.cols)

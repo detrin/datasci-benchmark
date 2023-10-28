@@ -16,7 +16,7 @@ parser.add_argument(
 parser.add_argument("--pandas", action="store_true", help="Benchmark pandas")
 parser.add_argument("--polars", action="store_true", help="Benchmark polars")
 parser.add_argument("--xgboost", action="store_true", help="Benchmark xgboost")
-parser.add_argument("--pytorch", action="store_true", help="Benchmark pytorch")
+parser.add_argument("--torch", action="store_true", help="Benchmark torch")
 args = parser.parse_args()
 
 test_info = []
@@ -29,9 +29,9 @@ if args.polars:
 if args.xgboost:
     from xgboost_benchmark import benchmark_xgboost
     test_info.append(["xgboost", benchmark_xgboost])
-if args.pytorch:
-    from torch_benchmark import benchmark_pytorch
-    test_info.append(["pytorch", benchmark_pytorch])
+if args.torch:
+    from torch_benchmark import benchmark_torch
+    test_info.append(["torch", benchmark_torch])
 
 
 for name, func in test_info:
