@@ -14,5 +14,6 @@ python polars_benchmark.py --rows 1000 --cols 10
 python xgboost_benchmark.py --rows 1000 --cols 10
 python torch_benchmark.py --rows 1000 --cols 10
 
-python benchmark.py --rows 1000 --cols 10  
+python benchmark.py --rows 1000 --cols 10 --runs 10
+python benchmark.py --rows 1000000 --cols 10 --runs 50 --pandas --polars --xgboost
 ```
