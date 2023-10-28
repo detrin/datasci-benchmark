@@ -2,6 +2,7 @@ import numpy as np
 import timeit
 import argparse
 import warnings  
+import json
 
 warnings.filterwarnings("ignore")  
 
@@ -25,6 +26,9 @@ parser.add_argument("--lightgbm", action="store_true", help="Benchmark lightgbm"
 parser.add_argument("--torch", action="store_true", help="Benchmark torch")
 parser.add_argument("--svm", action="store_true", help="Benchmark SVM")
 parser.add_argument("--knn", action="store_true", help="Benchmark KNN")
+
+parser.add_argument("--json", action="store_true", help="Output results as JSON")
+parser.add_argument("--name", type=str, default="mymachine", help="Name of the machine")
 args = parser.parse_args()
 
 if args.runs < 3:
@@ -61,7 +65,8 @@ if args.knn:
 
 
 for name, func in test_info:
-    print(f"Benchmarking {name}...")
+    if not args.json:
+        print(f"Benchmarking {name}...")
     times = []
     for _ in range(args.runs):
         times.append(func(n_rows=args.rows, n_cols=args.cols, verbose=False))
@@ -70,5 +75,12 @@ for name, func in test_info:
     mus = {k: np.mean([t[k] for t in times]) for k in keys}
     stds = {k: np.std([t[k] for t in times]) for k in keys}
 
-    for k in keys:
-        print(f"Mean {k}: {mus[k]:.4f} s +/- {stds[k]:.4f} s")
+    if not args.json:
+        for k in keys:
+            print(f"Mean {k}: {mus[k]:.4f} s +/- {stds[k]:.4f} s")
+    else:
+        results = []
+        for k in keys:
+            results.append({"machine": args.name, "name": name, "metric": k, "value": mus[k], "std": stds[k]})
+
+        print(json.dumps(results))
