@@ -9,8 +9,10 @@ python -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 
-python pandas_benchmark.py --rows 1000000 --cols 200
-python polars_benchmark.py --rows 1000000 --cols 200
-python xgboost_benchmark.py --rows 1000000 --cols 200
-python torch_benchmark.py --rows 100000 --cols 200
+python pandas_benchmark.py --rows 1000 --cols 10
+python polars_benchmark.py --rows 1000 --cols 10
+python xgboost_benchmark.py --rows 1000 --cols 10
+python torch_benchmark.py --rows 1000 --cols 10
+
+python benchmark.py --rows 1000 --cols 10  
 ```
