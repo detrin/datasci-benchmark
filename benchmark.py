@@ -83,4 +83,5 @@ for name, func in test_info:
         for k in keys:
             results.append({"machine": args.name, "name": name, "metric": k, "value": mus[k], "std": stds[k]})
 
-        print(json.dumps(results))
+if args.json:
+    print(json.dumps(results))
