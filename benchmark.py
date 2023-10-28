@@ -21,6 +21,7 @@ parser.add_argument("--polars", action="store_true", help="Benchmark polars")
 parser.add_argument("--binning", action="store_true", help="Benchmark binning")
 parser.add_argument("--logreg", action="store_true", help="Benchmark Logistic Regression")
 parser.add_argument("--xgboost", action="store_true", help="Benchmark xgboost")
+parser.add_argument("--lightgbm", action="store_true", help="Benchmark lightgbm")
 parser.add_argument("--torch", action="store_true", help="Benchmark torch")
 parser.add_argument("--svm", action="store_true", help="Benchmark SVM")
 parser.add_argument("--knn", action="store_true", help="Benchmark KNN")
@@ -45,6 +46,9 @@ if args.logreg:
 if args.xgboost:
     from xgboost_benchmark import benchmark_xgboost
     test_info.append(["xgboost", benchmark_xgboost])
+if args.lightgbm:
+    from lightgbm_benchmark import benchmark_lightgbm
+    test_info.append(["lightgbm", benchmark_lightgbm])
 if args.torch:
     from torch_benchmark import benchmark_torch
     test_info.append(["torch", benchmark_torch])
