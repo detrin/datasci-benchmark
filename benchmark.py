@@ -1,11 +1,5 @@
 import numpy as np
 import timeit
-
-from pandas_benchmark import benchmark_pandas
-from polars_benchmark import benchmark_polars
-from torch_benchmark import benchmark_pytorch
-from xgboost_benchmark import benchmark_xgboost
-
 import argparse
 
 parser = argparse.ArgumentParser()
@@ -27,12 +21,16 @@ args = parser.parse_args()
 
 test_info = []
 if args.pandas:
+    from pandas_benchmark import benchmark_pandas
     test_info.append(["pandas", benchmark_pandas])
 if args.polars:
+    from polars_benchmark import benchmark_polars
     test_info.append(["polars", benchmark_polars])
 if args.xgboost:
+    from xgboost_benchmark import benchmark_xgboost
     test_info.append(["xgboost", benchmark_xgboost])
 if args.pytorch:
+    from torch_benchmark import benchmark_pytorch
     test_info.append(["pytorch", benchmark_pytorch])
 
 
